@@ -11,12 +11,16 @@ const FinanceLotSlide = () => {
             <Text style={{fontWeight: 'bold', fontSize: 34, marginTop: 100, marginBottom: 50, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>Finanzas Lotes</Text>
         </View>
         <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
-            <TouchableOpacity style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:20}}>
+            <TouchableOpacity onPress={() => {
+                navigation.navigate("LotSelectSlide");
+                }} style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:20}}>
                 <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:25}}>Seleccionar Lote</Text>
             </TouchableOpacity>
         </View>
         <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
-            <TouchableOpacity style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:20}}>
+            <TouchableOpacity onPress={() => {
+                navigation.navigate("RegisterSpentLot");
+                }} style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:20}}>
                 <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:25}}>Agregar Gasto</Text>
             </TouchableOpacity>
         </View>

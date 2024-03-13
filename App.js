@@ -21,6 +21,13 @@ import ProfileSlide from './src/screens/ProfileSlide';
 import ServicesSlide from './src/screens/ServicesSlide';
 import EventsSlide from './src/screens/EventsSlide';
 import TutorialSlide from './src/screens/TutorialSlide';
+import RegisterFarm from './src/screens/RegisterFarm';
+import RegisterLot from './src/screens/RegisterLot';
+import RegisterProduct from './src/screens/RegisterProduct';
+import RegisterSpentLot from './src/screens/RegisterSpentLot';
+import RegisterSpentProduct from './src/screens/RegisterSpentProduct';
+import LotSelectSlide from './src/screens/LotSelectSlide';
+import ProductSelectSlide from './src/screens/ProductSelectSlide';
 
 
 //Instanciando el objeto de la clase createStachNavigator
@@ -48,6 +55,13 @@ export default function App() {
         <Stack.Screen name="ServicesSlide" component={ServicesSlide} options={{headerShown: false}}></Stack.Screen>
         <Stack.Screen name="EventsSlide" component={EventsSlide} options={{headerShown: false}}></Stack.Screen>
         <Stack.Screen name="TutorialSlide" component={TutorialSlide} options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen name="RegisterFarm" component={RegisterFarm} options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen name="RegisterLot" component={RegisterLot} options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen name="RegisterProduct" component={RegisterProduct} options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen name="RegisterSpentLot" component={RegisterSpentLot} options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen name="RegisterSpentProduct" component={RegisterSpentProduct} options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen name="LotSelectSlide" component={LotSelectSlide} options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen name="ProductSelectSlide" component={ProductSelectSlide} options={{headerShown: false}}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
