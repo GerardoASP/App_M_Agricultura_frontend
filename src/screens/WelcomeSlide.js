@@ -7,7 +7,7 @@ const WelcomeSlide = () => {
   const navigation = useNavigation();
   return (
     <View style={{flex:0, justifyContent:"center", alignItems:"center", alignContent:"center"}}>
-        <Text style={{fontWeight: 'bold', fontSize: 24, marginTop: 260, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>Bienvenido a _ su asistente de gestión del agro</Text>
+        <Text style={{fontWeight: 'bold', fontSize: 24, marginTop: 260, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>Bienvenido a AgriAmigo su asistente de gestión del agro</Text>
         <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
             <Text style={{fontWeight: 'bold', fontSize: 24, marginTop: 100, marginBottom: 30, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>Servicios</Text>
             <TouchableOpacity onPress={() => {

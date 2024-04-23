@@ -11,14 +11,24 @@ const FinanceProductSlide = () => {
             <Text style={{fontWeight: 'bold', fontSize: 34, marginTop: 100, marginBottom: 50, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>Finanzas Producto</Text>
         </View>
         <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
-            <TouchableOpacity style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:20}}>
+            <TouchableOpacity onPress={() => {
+                navigation.navigate("ProductSelectSlide");
+                }} style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:20}}>
                 <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:25}}>Seleccionar Producto</Text>
             </TouchableOpacity>
         </View>
         <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
-            <TouchableOpacity style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:20}}>
+            <TouchableOpacity onPress={() => {
+                navigation.navigate("RegisterSpentProduct");
+                }} style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:20}}>
                 <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:25}}>Agregar Gasto</Text>
             </TouchableOpacity>
+        </View>
+        <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
+            <Text style={{fontWeight: 'bold', fontSize: 24, marginTop: 30, marginBottom: 50, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>Lista de gastos</Text>
+        </View>
+        <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
+            <Text style={{fontWeight: 'bold', fontSize: 24, marginTop: 30, marginBottom: 50, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>Valor invertido</Text>
         </View>
         <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
             <TouchableOpacity onPress={() => {
