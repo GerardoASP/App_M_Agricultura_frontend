@@ -28,6 +28,12 @@ import RegisterSpentLot from './src/screens/RegisterSpentLot';
 import RegisterSpentProduct from './src/screens/RegisterSpentProduct';
 import LotSelectSlide from './src/screens/LotSelectSlide';
 import ProductSelectSlide from './src/screens/ProductSelectSlide';
+import MyEventsSlide from './src/screens/MyEventsSlide';
+import OptionsAddMyEventsSlide from './src/screens/OptionsAddMyEventsSlide';
+import MarketEvent from './src/screens/MarketEvent';
+import CapacitationEvent from './src/screens/CapacitationEvent';
+import RegisterEventWithoutPhoto from './src/screens/RegisterEventWithoutPhoto';
+import ListMyEvents from './src/screens/ListMyEvents';
 
 
 //Instanciando el objeto de la clase createStachNavigator
@@ -62,6 +68,12 @@ export default function App() {
         <Stack.Screen name="RegisterSpentProduct" component={RegisterSpentProduct} options={{headerShown: false}}></Stack.Screen>
         <Stack.Screen name="LotSelectSlide" component={LotSelectSlide} options={{headerShown: false}}></Stack.Screen>
         <Stack.Screen name="ProductSelectSlide" component={ProductSelectSlide} options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen name="MyEventsSlide" component={MyEventsSlide} options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen name="OptionsAddMyEventsSlide" component={OptionsAddMyEventsSlide} options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen name="MarketEvent" component={MarketEvent} options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen name="CapacitationEvent" component={CapacitationEvent} options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen name="RegisterEventWithoutPhoto" component={RegisterEventWithoutPhoto} options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen name='ListMyEvents' component={ListMyEvents} options={{headerShown: false}}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

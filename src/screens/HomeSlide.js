@@ -1,15 +1,22 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeSlide = () => {
   const navigation = useNavigation();
+
+  const handleLogout = async () => {
+    // Elimina el token de acceso y realiza cualquier otra lógica de cierre de sesión necesaria
+    await AsyncStorage.removeItem('accessToken');
+    await AsyncStorage.removeItem('verifyCode');
+    await AsyncStorage.clear();
+    navigation.navigate('WelcomeSlide'); // Redirige al usuario a la pantalla de inicio de sesión
+  };
   return (
     <View style={{flex:0, justifyContent:"center", alignItems:"center", alignContent:"center"}}>
         <View style={{flexDirection: 'row',alignItems: 'center', justifyContent: "center"}}>
-            <TouchableOpacity onPress={() => {
-                    navigation.navigate("WelcomeSlide");
-                    }} style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:120, marginRight:200}}>
+            <TouchableOpacity onPress={handleLogout} style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:120, marginRight:200}}>
                 <Text style={{ color: '#FFF',fontWeight: 'bold',fontSize:16}}>Cerrar Sesión</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => {
