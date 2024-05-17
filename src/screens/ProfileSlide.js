@@ -14,7 +14,7 @@ const ProfileSlide = () => {
     try {
         const verifyCode =  await AsyncStorage.getItem('verifyCode');
         //console.log(verifyCode);
-        const response = await fetch(`http://192.168.1.4:3000/api/v1/users/get-user-by-verify-code/${verifyCode}`);
+        const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/users/get-user-by-verify-code/${verifyCode}`);
         const jsonData = await response.json();
         setUserData(jsonData);
         //console.log(userData._id);

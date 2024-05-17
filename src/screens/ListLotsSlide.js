@@ -40,7 +40,7 @@ const ListLotsSlide = () => {
     try {
         const verifyCode =  await AsyncStorage.getItem('verifyCode');
         //console.log(verifyCode);
-        const response = await fetch(`http://192.168.1.4:3000/api/v1/users/get-user-by-verify-code/${verifyCode}`);
+        const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/users/get-user-by-verify-code/${verifyCode}`);
         const jsonData = await response.json();
         setUserData(jsonData);
         //console.log(userData._id);
@@ -61,7 +61,7 @@ const ListLotsSlide = () => {
 
     useEffect(() => {
         if (userData && userData._id) {
-          fetch(`http://192.168.1.4:3000/api/v1/users/${userData._id}/farms`)
+          fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/users/${userData._id}/farms`)
             .then(response => response.json())
             .then(data => {
               //console.log('Publications Data:', data); // Verifica los datos de las publicaciones recibidos
@@ -76,7 +76,7 @@ const ListLotsSlide = () => {
     useEffect(()=>{
         const fetchDataPublications = async () => {
           try {
-            const response = await fetch(`http://192.168.1.4:3000/api/v1/farms/${value}/lots`);
+            const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/farms/${value}/lots`);
             const jsonData = await response.json();
             setLotFarms(jsonData);
           } catch (error) {
@@ -88,7 +88,7 @@ const ListLotsSlide = () => {
 
       const handleUpdateLot = async (idLot) =>{
         try{
-            const response = await axios.put(`http://192.168.1.4:3000/api/v1/lots/update-lot/${idLot}`, newLot);
+            const response = await axios.put(`https://appmagriculturabackend-production.up.railway.app/api/v1/lots/update-lot/${idLot}`, newLot);
             //console.log(response.data);
             Alert.alert("Actualización exitosa");
         }catch(error){
@@ -100,7 +100,7 @@ const ListLotsSlide = () => {
         try{
           console.log(idLot)
           console.log(value)
-          const response = await axios.delete(`http://192.168.1.4:3000/api/v1/lots/${idLot}`,{
+          const response = await axios.delete(`https://appmagriculturabackend-production.up.railway.app/api/v1/lots/${idLot}`,{
             data: {
               farmId: value // Aquí deberías usar userData._id en lugar de userData.author si _id es el campo correcto que representa el userId
             }
@@ -113,7 +113,7 @@ const ListLotsSlide = () => {
     
     const handleSubmit = async () =>{
         try{
-            const response = await fetch(`http://192.168.1.4:3000/api/v1/farms/${value}/lots`);
+            const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/farms/${value}/lots`);
             const jsonData = await response.json();
             setLotFarms(jsonData);
         }catch (error) {

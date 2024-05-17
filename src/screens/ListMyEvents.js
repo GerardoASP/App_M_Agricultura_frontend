@@ -40,7 +40,7 @@ const ListMyEvents = () => {
       try {
         const verifyCode = await AsyncStorage.getItem('verifyCode');
         //console.log(verifyCode);
-        const response = await fetch(`http://192.168.1.4:3000/api/v1/users/get-user-by-verify-code/${verifyCode}`);
+        const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/users/get-user-by-verify-code/${verifyCode}`);
         const jsonData = await response.json();
         setUserData(jsonData);
         //console.log("Ahhh",jsonData)
@@ -74,7 +74,7 @@ useEffect(() => {
 
 useEffect(() => {
   if (userData && userData._id) {
-    fetch(`http://192.168.1.4:3000/api/v1/users/${userData._id}/publications`)
+    fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/users/${userData._id}/publications`)
       .then(response => response.json())
       .then(data => {
         //console.log('Publications Data:', data); // Verifica los datos de las publicaciones recibidos
@@ -86,7 +86,7 @@ useEffect(() => {
 
 const handleKeepPhoto = async (idPublication) =>{
   try{
-    const response = await fetch(`http://192.168.1.4:3000/api/v1/publications/${idPublication}`);
+    const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/publications/${idPublication}`);
     const jsonData = await response.json();
     console.log(jsonData.avatar)
     setNewTitle(prevState => ({
@@ -102,7 +102,7 @@ const handleKeepPhoto = async (idPublication) =>{
 
 const handleUpdateEvent = async (idPublication) =>{
   try{
-      const response = await axios.put(`http://192.168.1.4:3000/api/v1/publications/${idPublication}/updatePost`, newTitle);
+      const response = await axios.put(`https://appmagriculturabackend-production.up.railway.app/api/v1/publications/${idPublication}/updatePost`, newTitle);
       //console.log(response.data);
       Alert.alert("Actualización exitosa");
   }catch(error){
@@ -114,7 +114,7 @@ const handleDeleteEvent = async (idPublication) =>{
   try{
     console.log(idPublication)
     console.log(newTitle.author)
-    const response = await axios.delete(`http://192.168.1.4:3000/api/v1/publications/${idPublication}`,{
+    const response = await axios.delete(`https://appmagriculturabackend-production.up.railway.app/api/v1/publications/${idPublication}`,{
       data: {
         userId: userData._id // Aquí deberías usar userData._id en lugar de userData.author si _id es el campo correcto que representa el userId
       }
@@ -188,7 +188,7 @@ const pickImage = async () => {
                           <Modal visible={modalVisible} onRequestClose={()=>setModalVisible}>
                             <View style={{flex:0, justifyContent:"center", alignItems:"center", alignContent:"center"}}>
                               <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
-                                <Text style={{fontWeight: 'bold', fontSize: 34, marginTop: 100, marginBottom: 50, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>Actualizar Evento</Text>
+                                <Text style={{fontWeight: 'bold', fontSize: 34, marginTop: 20, marginBottom: 20, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>Actualizar Evento</Text>
                               </View>
                               <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
                                 <TextInput
@@ -219,24 +219,27 @@ const pickImage = async () => {
                                 />
                               </View>
                               <View style={{flexDirection: 'row',alignItems: 'center', justifyContent: "center"}}>
-                                <TouchableOpacity  onPress={pickImage} style={{ shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign: 'center', fontWeight: 'bold', marginVertical: 20 }}>
+                                <TouchableOpacity  onPress={pickImage} style={{ shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign: 'center', fontWeight: 'bold', marginVertical: 20, marginRight:2 }}>
                                   <Text style={{ color: '#FFF', fontWeight: 'bold', fontSize: 25 }}>Seleccionar Foto</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity  onPress={takeImage} style={{ shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign: 'center', fontWeight: 'bold', marginVertical: 20 }}>
                                   <Text style={{ color: '#FFF', fontWeight: 'bold', fontSize: 25 }}>Tomar Foto</Text>
                                 </TouchableOpacity>
+                              </View>
+                              <View style={{flexDirection: 'row',alignItems: 'center', justifyContent: "center"}}>
                                 {image && <Image source={{ uri: image }} style={styles.image} />}
                               </View>
-
-                              <View style={{flexDirection: 'row',alignItems: 'center', justifyContent: "center"}}>
+                              <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
                                 <TouchableOpacity onPress={()=>handleKeepPhoto(personalE._id)} style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:20}}>
-                                  <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:10}}>Mantener foto</Text>
+                                  <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:20}}>Mantener foto</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={()=>handleUpdateEvent(personalE._id)} style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:20}}>
-                                  <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:10}}>Cambiar Nombre Evento</Text>
+                                  <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:20}}>Cambiar Nombre Evento</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={()=>setModalVisible(false)} style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:20}}>
-                                  <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:10}}>Regresar</Text>
+                              </View>
+                              <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
+                              <TouchableOpacity onPress={()=>setModalVisible(false)} style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold'}}>
+                                  <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:20}}>Regresar</Text>
                                 </TouchableOpacity>
                               </View>
                             </View>

@@ -33,7 +33,7 @@ const ListFarmsSlide = () => {
     try {
         const verifyCode =  await AsyncStorage.getItem('verifyCode');
         //console.log(verifyCode);
-        const response = await fetch(`http://192.168.1.4:3000/api/v1/users/get-user-by-verify-code/${verifyCode}`);
+        const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/users/get-user-by-verify-code/${verifyCode}`);
         const jsonData = await response.json();
         setUserData(jsonData);
         //console.log(userData._id);
@@ -63,7 +63,7 @@ const ListFarmsSlide = () => {
 
     useEffect(() => {
         if (userData && userData._id) {
-          fetch(`http://192.168.1.4:3000/api/v1/users/${userData._id}/farms`)
+          fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/users/${userData._id}/farms`)
             .then(response => response.json())
             .then(data => {
               //console.log('Publications Data:', data); // Verifica los datos de las publicaciones recibidos
@@ -106,7 +106,7 @@ const ListFarmsSlide = () => {
 
     const handleUpdateFarm = async (idFarm) =>{
         try{
-            const response = await axios.put(`http://192.168.1.4:3000/api/v1/farms/update-farm/${idFarm}`, newFarm);
+            const response = await axios.put(`https://appmagriculturabackend-production.up.railway.app/api/v1/farms/update-farm/${idFarm}`, newFarm);
             //console.log(response.data);
             Alert.alert("Actualización exitosa");
         }catch(error){
@@ -118,7 +118,7 @@ const ListFarmsSlide = () => {
         try{
           console.log(idFarm)
           console.log(userData._id)
-          const response = await axios.delete(`http://192.168.1.4:3000/api/v1/farms/${idFarm}`,{
+          const response = await axios.delete(`https://appmagriculturabackend-production.up.railway.app/api/v1/farms/${idFarm}`,{
             data: {
               userId: userData._id // Aquí deberías usar userData._id en lugar de userData.author si _id es el campo correcto que representa el userId
             }
