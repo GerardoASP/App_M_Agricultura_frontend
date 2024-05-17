@@ -32,7 +32,7 @@ const RegisterSlide = () => {
   const handleSubmit = async () =>{
     try{
         console.log(newUser);
-        const response = await axios.post('http://192.168.1.4:3000/api/v1/auth/register', newUser);
+        const response = await axios.post('https://appmagriculturabackend-production.up.railway.app/api/v1/auth/register', newUser);
         console.log(response.data);
         navigation.navigate('LoginSlide');
     }catch(error){

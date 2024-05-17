@@ -33,7 +33,7 @@ const FinanceProductSpentSlide = () => {
         try {
             const verifyCode =  await AsyncStorage.getItem('verifyCode');
             //console.log(verifyCode);
-            const response = await fetch(`http://192.168.1.4:3000/api/v1/users/get-user-by-verify-code/${verifyCode}`);
+            const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/users/get-user-by-verify-code/${verifyCode}`);
             const jsonData = await response.json();
             setUserData(jsonData);
             //console.log(userData._id);
@@ -54,7 +54,7 @@ const FinanceProductSpentSlide = () => {
     
     useEffect(() => {
         if (userData && userData._id) {
-          fetch(`http://192.168.1.4:3000/api/v1/users/${userData._id}/farms`)
+          fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/users/${userData._id}/farms`)
             .then(response => response.json())
             .then(data => {
               //console.log('Publications Data:', data); // Verifica los datos de las publicaciones recibidos
@@ -66,7 +66,7 @@ const FinanceProductSpentSlide = () => {
 
     const handleFarm = async (valueFarm) =>{
         try{
-            const response = await fetch(`http://192.168.1.4:3000/api/v1/farms/${valueFarm}/lots`);
+            const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/farms/${valueFarm}/lots`);
             const jsonData = await response.json();
             setLotFarms(jsonData);
         }catch(error){
@@ -79,7 +79,7 @@ const FinanceProductSpentSlide = () => {
 
     const handleLot = async (valueLot) =>{
         try{
-            const response = await fetch(`http://192.168.1.4:3000/api/v1/lots/${valueLot}/products`);
+            const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/lots/${valueLot}/products`);
             const jsonData = await response.json();
             setProductLot(jsonData);
         }catch (error) {
@@ -91,7 +91,7 @@ const FinanceProductSpentSlide = () => {
 
     const handleProduct = async (valueProduct) =>{
         try{
-            const response = await fetch(`http://192.168.1.4:3000/api/v1/products/${valueProduct}/spents`);
+            const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/products/${valueProduct}/spents`);
             const jsonData = await response.json();
             setSpentsProduct(jsonData);
         }catch (error) {
@@ -101,7 +101,7 @@ const FinanceProductSpentSlide = () => {
 
     const handleProductTwo = async (valueProduct) =>{
         try{
-            const response = await fetch(`http://192.168.1.4:3000/api/v1/products/${valueProduct}/total-value-invested`);
+            const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/products/${valueProduct}/total-value-invested`);
             const jsonData = await response.json();
             setValueTotalInvested(jsonData);
         }catch (error) {
@@ -113,7 +113,7 @@ const FinanceProductSpentSlide = () => {
     const handleSubmit = async () =>{
         console.log(newSpent)
         try{
-            const response = await axios.post(`http://192.168.1.4:3000/api/v1/spents/new-spent-for-product`, newSpent);
+            const response = await axios.post(`https://appmagriculturabackend-production.up.railway.app/api/v1/spents/new-spent-for-product`, newSpent);
             console.log(response.data);
             Alert.alert("Felicidades Creaste un gasto para el producto, Mira la lista de gastos");
         }catch(error){
@@ -268,7 +268,7 @@ const FinanceProductSpentSlide = () => {
         </View>
         <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
           <Text style={{fontWeight: 'bold', fontSize: 24, marginTop: 15, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>Valor Invertido en Producto</Text>
-          <Text style={{fontWeight: 'bold', fontSize: 24, marginTop: 10, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>({valueTotalInvested})</Text>
+          <Text style={{fontWeight: 'bold', fontSize: 24, marginTop: 20, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>({JSON.stringify(valueTotalInvested)})</Text>
         </View>
         <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
           <TouchableOpacity onPress={() => {

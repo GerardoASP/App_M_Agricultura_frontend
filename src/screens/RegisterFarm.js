@@ -23,7 +23,7 @@ const RegisterFarm = () => {
     try {
         const verifyCode =  await AsyncStorage.getItem('verifyCode');
         //console.log(verifyCode);
-        const response = await fetch(`http://192.168.1.4:3000/api/v1/users/get-user-by-verify-code/${verifyCode}`);
+        const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/users/get-user-by-verify-code/${verifyCode}`);
         const jsonData = await response.json();
         setUserData(jsonData);
         //console.log(userData._id);
@@ -89,7 +89,7 @@ const RegisterFarm = () => {
     const handleSubmit = async () =>{
         try{
             console.log(newFarm);
-            const response = await axios.post('http://192.168.1.4:3000/api/v1/farms/new-farm', newFarm);
+            const response = await axios.post('https://appmagriculturabackend-production.up.railway.app/api/v1/farms/new-farm', newFarm);
             console.log(response.data);
             Alert.alert("Felicidades Creaste una finca, Mira la lista de fincas");
         }catch(error){

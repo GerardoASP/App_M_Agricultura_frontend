@@ -29,7 +29,7 @@ const LoginSlide = () => {
   
       console.log(newUser);
   
-      const response = await axios.post("http:///192.168.1.4:3000/api/v1/auth/login", newUser);
+      const response = await axios.post("https://appmagriculturabackend-production.up.railway.app/api/v1/auth/login", newUser);
   
       console.log(response.data);
   

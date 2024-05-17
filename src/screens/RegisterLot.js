@@ -27,7 +27,7 @@ const RegisterLot = () => {
     try {
         const verifyCode =  await AsyncStorage.getItem('verifyCode');
         //console.log(verifyCode);
-        const response = await fetch(`http://192.168.1.4:3000/api/v1/users/get-user-by-verify-code/${verifyCode}`);
+        const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/users/get-user-by-verify-code/${verifyCode}`);
         const jsonData = await response.json();
         setUserData(jsonData);
         //console.log(userData._id);
@@ -48,7 +48,7 @@ const RegisterLot = () => {
 
     useEffect(() => {
         if (userData && userData._id) {
-          fetch(`http://192.168.1.4:3000/api/v1/users/${userData._id}/farms`)
+          fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/users/${userData._id}/farms`)
             .then(response => response.json())
             .then(data => {
               //console.log('Publications Data:', data); // Verifica los datos de las publicaciones recibidos
@@ -69,7 +69,7 @@ const RegisterLot = () => {
   const handleSubmit = async () =>{
     try{
         console.log(newLot);
-        const response = await axios.post(`http://192.168.1.4:3000/api/v1/lots/new-lot`, newLot);
+        const response = await axios.post(`https://appmagriculturabackend-production.up.railway.app/api/v1/lots/new-lot`, newLot);
         console.log(response.data);
         Alert.alert("Felicidades Creaste un lote, Mira la lista de lotes");
     }catch(error){

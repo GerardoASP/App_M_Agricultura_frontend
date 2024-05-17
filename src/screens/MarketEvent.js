@@ -10,7 +10,7 @@ const MarketEvent = () => {
   useEffect(()=>{
     const fetchDataPublications = async () => {
       try {
-        const response = await fetch(`http://192.168.1.4:3000/api/v1/publications/search-publication/type/Mercado`);
+        const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/publications/search-publication/type/Mercado`);
         const jsonData = await response.json();
         setMarketEvents(jsonData);
       } catch (error) {

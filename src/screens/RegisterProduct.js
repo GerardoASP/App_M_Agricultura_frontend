@@ -33,7 +33,7 @@ const RegisterProduct = () => {
     try {
         const verifyCode =  await AsyncStorage.getItem('verifyCode');
         //console.log(verifyCode);
-        const response = await fetch(`http://192.168.1.4:3000/api/v1/users/get-user-by-verify-code/${verifyCode}`);
+        const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/users/get-user-by-verify-code/${verifyCode}`);
         const jsonData = await response.json();
         setUserData(jsonData);
         //console.log(userData._id);
@@ -54,7 +54,7 @@ const RegisterProduct = () => {
 
     useEffect(() => {
         if (userData && userData._id) {
-          fetch(`http://192.168.1.4:3000/api/v1/users/${userData._id}/farms`)
+          fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/users/${userData._id}/farms`)
             .then(response => response.json())
             .then(data => {
               //console.log('Publications Data:', data); // Verifica los datos de las publicaciones recibidos
@@ -66,7 +66,7 @@ const RegisterProduct = () => {
 
      const handleFarm = async (valueFarm) =>{
         try{
-            const response = await fetch(`http://192.168.1.4:3000/api/v1/farms/${valueFarm}/lots`);
+            const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/farms/${valueFarm}/lots`);
             const jsonData = await response.json();
             setLotFarms(jsonData);
         }catch(error){
@@ -80,7 +80,7 @@ const RegisterProduct = () => {
    const handleSubmit = async () =>{
         console.log(newProduct)
         try{
-            const response = await axios.post(`http://192.168.1.4:3000/api/v1/products/new-product`, newProduct);
+            const response = await axios.post(`https://appmagriculturabackend-production.up.railway.app/api/v1/products/new-product`, newProduct);
             console.log(response.data);
             Alert.alert("Felicidades Creaste un producto, Mira la lista de productos");
         }catch(error){

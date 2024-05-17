@@ -42,7 +42,7 @@ const FinanceLotSpentSlide = () => {
     try {
         const verifyCode =  await AsyncStorage.getItem('verifyCode');
         //console.log(verifyCode);
-        const response = await fetch(`http://192.168.1.4:3000/api/v1/users/get-user-by-verify-code/${verifyCode}`);
+        const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/users/get-user-by-verify-code/${verifyCode}`);
         const jsonData = await response.json();
         setUserData(jsonData);
         //console.log(userData._id);
@@ -63,19 +63,19 @@ const FinanceLotSpentSlide = () => {
 
     useEffect(() => {
         if (userData && userData._id) {
-          fetch(`http://192.168.1.4:3000/api/v1/users/${userData._id}/farms`)
+          fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/users/${userData._id}/farms`)
             .then(response => response.json())
             .then(data => {
               //console.log('Publications Data:', data); // Verifica los datos de las publicaciones recibidos
               setUserFarms(data);
             })
-            .catch(error => console.error('Error fetching publications:', error));
+            .catch(error => console.error('Error fetching farms:', error));
         }
     }, [userData]);
 
     const handleFarm = async (valueFarm) =>{
         try{
-            const response = await fetch(`http://192.168.1.4:3000/api/v1/farms/${valueFarm}/lots`);
+            const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/farms/${valueFarm}/lots`);
             const jsonData = await response.json();
             setLotFarms(jsonData);
         }catch(error){
@@ -85,7 +85,7 @@ const FinanceLotSpentSlide = () => {
 
     const handleLot = async (valueLot) =>{
       try{
-          const response = await fetch(`http://192.168.1.4:3000/api/v1/lots/${valueLot}/spents`);
+          const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/lots/${valueLot}/spents`);
           const jsonData = await response.json();
           setSpentsLot(jsonData);
       }catch(error){
@@ -95,7 +95,7 @@ const FinanceLotSpentSlide = () => {
 
     const handleLotTwo = async (valueLot) =>{
       try{
-          const response = await fetch(`http://192.168.1.4:3000/api/v1/lots/${valueLot}/total-invested-value`);
+          const response = await fetch(`https://appmagriculturabackend-production.up.railway.app/api/v1/lots/${valueLot}/total-invested-value`);
           const jsonData = await response.json();
           setValueTotalInvested(jsonData);
       }catch(error){
@@ -109,7 +109,7 @@ const FinanceLotSpentSlide = () => {
     const handleSubmit = async () =>{
       console.log(newSpent)
       try{
-          const response = await axios.post(`http://192.168.1.4:3000/api/v1/spents/new-spent-for-lot`, newSpent);
+          const response = await axios.post(`https://appmagriculturabackend-production.up.railway.app/api/v1/spents/new-spent-for-lot`, newSpent);
           console.log(response.data);
           Alert.alert("Felicidades Creaste un gasto para el lote, Mira la lista de gastos");
       }catch(error){
@@ -244,7 +244,7 @@ const FinanceLotSpentSlide = () => {
         </View>
         <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
           <Text style={{fontWeight: 'bold', fontSize: 24, marginTop: 20, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>Valor Invertido en Lote</Text>
-          <Text style={{fontWeight: 'bold', fontSize: 24, marginTop: 20, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>({valueTotalInvested})</Text>
+          <Text style={{fontWeight: 'bold', fontSize: 24, marginTop: 20, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>({JSON.stringify(valueTotalInvested)})</Text>
         </View>
         <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
           <TouchableOpacity onPress={() => {
@@ -314,6 +314,8 @@ const styles = StyleSheet.create({
 
 export default FinanceLotSpentSlide
 
-/* Error : cannot read property 'openpicker' of null
-  Posible Solución : import * as DatePicker from 'react-native-date-picker'
+/*
+Error: [Error: Objects are not valid as a React child (found: object with keys {message}). If you meant to render a collection of children, use an array instead.]
+Origen:<Text style={{fontWeight: 'bold', fontSize: 24, marginTop: 20, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>({valueTotalInvested})</Text>
+Solución:<Text style={{fontWeight: 'bold', fontSize: 24, marginTop: 20, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>({JSON.stringify(valueTotalInvested)})</Text>
 */
