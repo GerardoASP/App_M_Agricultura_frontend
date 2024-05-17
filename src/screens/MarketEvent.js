@@ -36,6 +36,7 @@ const MarketEvent = () => {
           			  <Card.Content>
             				<Text variant="bodyMedium" style={{fontWeight: 'bold', fontSize: 20, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>{"Descripcion: " + marketE.description}</Text>
           			  </Card.Content>
+                  <Card.Cover source={{ uri:  `${marketE.avatar}`}} />
         		    </Card>
 		        ))
 	        ) : (
