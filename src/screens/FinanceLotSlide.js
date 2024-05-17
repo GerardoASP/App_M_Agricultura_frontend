@@ -12,23 +12,17 @@ const FinanceLotSlide = () => {
         </View>
         <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
             <TouchableOpacity onPress={() => {
-                navigation.navigate("LotSelectSlide");
+                navigation.navigate("FinanceLotSpentSlide");
                 }} style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:20}}>
-                <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:25}}>Seleccionar Lote</Text>
+                <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:25}}>Gastos</Text>
             </TouchableOpacity>
         </View>
         <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
             <TouchableOpacity onPress={() => {
-                navigation.navigate("RegisterSpentLot");
+                navigation.navigate("FinanceLotSaleSlide");
                 }} style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:20}}>
-                <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:25}}>Agregar Gasto</Text>
+                <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:25}}>Ventas</Text>
             </TouchableOpacity>
-        </View>
-        <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
-            <Text style={{fontWeight: 'bold', fontSize: 24, marginTop: 30, marginBottom: 50, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>Lista de gastos</Text>
-        </View>
-        <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
-            <Text style={{fontWeight: 'bold', fontSize: 24, marginTop: 30, marginBottom: 50, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>Valor invertido</Text>
         </View>
         <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
             <TouchableOpacity onPress={() => {

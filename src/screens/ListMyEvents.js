@@ -2,23 +2,29 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Alert, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Button, Card } from 'react-native-paper';
+import * as ImagePicker from 'expo-image-picker';
 
 const ListMyEvents = () => {  
   const navigation = useNavigation();
   const [selected,setSelected] = useState("");
   const [userData, setUserData] = useState('');
+  const [image, setImage] = useState(null);
   const [newTitle, setNewTitle] = useState({
     title: "",
     description:"", 
     typePublication:"",
     author: "",
+    avatar:"",
   });
   const [deleteTitle,setDeleteTitle]= useState({
     userId:"",
+  })
+  const [keepAvatar,setKeepAvatar] = useState({
+    avatarKeep : ""
   })
   const data = [
     {key:'1',value:'Mercado'},
@@ -78,6 +84,22 @@ useEffect(() => {
   }
 }, [userData]);
 
+const handleKeepPhoto = async (idPublication) =>{
+  try{
+    const response = await fetch(`http://192.168.1.4:3000/api/v1/publications/${idPublication}`);
+    const jsonData = await response.json();
+    console.log(jsonData.avatar)
+    setNewTitle(prevState => ({
+      ...prevState,
+      avatar: jsonData.avatar // Actualizar author cuando userData esté disponible
+    }));
+    //console.log(response.data);
+    Alert.alert("Listo, No se cambiara la foto");
+  }catch(error){
+    console.error(error);
+  }
+}
+
 const handleUpdateEvent = async (idPublication) =>{
   try{
       const response = await axios.put(`http://192.168.1.4:3000/api/v1/publications/${idPublication}/updatePost`, newTitle);
@@ -102,6 +124,48 @@ const handleDeleteEvent = async (idPublication) =>{
     console.error(error);
   }
 }
+
+const takeImage = async () => {
+  // No permissions request is necessary for launching the image library
+  let result = await ImagePicker.launchCameraAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.All,
+    allowsEditing: true,
+    aspect: [4, 3],
+    quality: 1,
+  });
+
+  console.log(result);
+
+  if (!result.canceled) {
+    setImage(result.assets[0].uri);
+    setNewTitle(prevState => ({
+      ...prevState,
+      avatar: result.assets[0].uri 
+    }));
+  }
+};
+
+
+const pickImage = async () => {
+  // No permissions request is necessary for launching the image library
+  let result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.All,
+    allowsEditing: true,
+    aspect: [4, 3],
+    quality: 1,
+  });
+
+  console.log(result);
+
+  if (!result.canceled) {
+    setImage(result.assets[0].uri);
+    setNewTitle(prevState => ({
+      ...prevState,
+      avatar: result.assets[0].uri 
+    }));
+  }
+};
+
   return (
     <View style={{flex:0, justifyContent:"center", alignItems:"center", alignContent:"center"}}>
         <Text style={{fontWeight: 'bold', fontSize: 24, marginTop: 70, marginBottom:20, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>Estos son tus eventos</Text>
@@ -118,6 +182,7 @@ const handleDeleteEvent = async (idPublication) =>{
           			  <Card.Content>
             				<Text variant="bodyMedium" style={{fontWeight: 'bold', fontSize: 20, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>{"Descrip " + personalE.description}</Text>
           			  </Card.Content>
+                  <Card.Cover source={{ uri:  `${personalE.avatar}`}} />
                         <Card.Actions>
                           <Button onPress={()=>setModalVisible(true)}> Cambiar Información</Button>
                           <Modal visible={modalVisible} onRequestClose={()=>setModalVisible}>
@@ -153,12 +218,25 @@ const handleDeleteEvent = async (idPublication) =>{
                                   placeholder="Tipo de Evento"
                                 />
                               </View>
-                              <View style={{flexDirection: 'column',alignItems: 'center', justifyContent: "center"}}>
+                              <View style={{flexDirection: 'row',alignItems: 'center', justifyContent: "center"}}>
+                                <TouchableOpacity  onPress={pickImage} style={{ shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign: 'center', fontWeight: 'bold', marginVertical: 20 }}>
+                                  <Text style={{ color: '#FFF', fontWeight: 'bold', fontSize: 25 }}>Seleccionar Foto</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity  onPress={takeImage} style={{ shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign: 'center', fontWeight: 'bold', marginVertical: 20 }}>
+                                  <Text style={{ color: '#FFF', fontWeight: 'bold', fontSize: 25 }}>Tomar Foto</Text>
+                                </TouchableOpacity>
+                                {image && <Image source={{ uri: image }} style={styles.image} />}
+                              </View>
+
+                              <View style={{flexDirection: 'row',alignItems: 'center', justifyContent: "center"}}>
+                                <TouchableOpacity onPress={()=>handleKeepPhoto(personalE._id)} style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:20}}>
+                                  <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:10}}>Mantener foto</Text>
+                                </TouchableOpacity>
                                 <TouchableOpacity onPress={()=>handleUpdateEvent(personalE._id)} style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:20}}>
-                                  <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:25}}>Cambiar Nombre Evento</Text>
+                                  <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:10}}>Cambiar Nombre Evento</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={()=>setModalVisible(false)} style={{shadowColor: '#000', alignItems: 'center', backgroundColor: '#4A90E2', padding: 10, textAlign:'center', fontWeight: 'bold', marginVertical:20}}>
-                                  <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:25}}>Regresar</Text>
+                                  <Text style={{ color: '#FFF',fontWeight: 'bold', fontSize:10}}>Regresar</Text>
                                 </TouchableOpacity>
                               </View>
                             </View>
@@ -206,6 +284,10 @@ const styles = StyleSheet.create({
       borderColor: '#ccc',
       borderRadius: 3,
       fontSize:20
+    },
+    image: {
+      width: 200,
+      height: 200,
     }
 })
 

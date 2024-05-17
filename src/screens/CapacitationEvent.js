@@ -35,6 +35,7 @@ const CapacitationEvent = () => {
           			  <Card.Content>
             				<Text variant="bodyMedium" style={{fontWeight: 'bold', fontSize: 20, fontFamily: 'San Francisco', fontFamily: 'Roboto',}}>{capacitationE.description}</Text>
           			  </Card.Content>
+                  <Card.Cover source={{ uri:  `${capacitationE.avatar}`}} />
         		    </Card>
 		        ))
 	        ) : (
